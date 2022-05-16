@@ -16,10 +16,8 @@ export async function signupUser(email, password) {
         return response.user;
     }
     else {
-        console.error(response);
-    }
-
-    return response.user;
+        console.error(response.error);
+    } 
 }
 
 export async function signInUser(email, password) {}
