@@ -21,18 +21,25 @@ export async function signupUser(email, password) {
 }
 
 export async function signInUser(email, password) {
-    
+    const response = await client.auth.signIn({ email, password });
+    if (response.user) {
+        console.log(response.user);
+        return response.user;
+    } else {
+        console.log('response');
+        console.error(response.error);
+    }
 }
 //When a user tries to visit a page that calls this function, we automatically redirect the user away from the login page if they are already logged in
 export async function checkAuth() {
-    if (getUser()) {
-        location.replace('./other-page');
+    if (!getUser()) {
+        location.replace('/');
     }
 }
 // when a user tries to visit a page that calls this function, we automatically redirect the user away from the login page if they are already logged in
 export async function redirectIfLoggedIn() {
     if (getUser()) {
-        location.replace('./other-page');
+        location.replace('/other-page');
     }
 }
 
