@@ -21,11 +21,7 @@ export async function signupUser(email, password) {
 }
 
 export async function signInUser(email, password) {
-    //export function checkAuth() {
-        //const user = getUser();
-
-       // if (!user) location.replace('/');
-   // }
+    
 }
 //When a user tries to visit a page that calls this function, we automatically redirect the user away from the login page if they are already logged in
 export async function checkAuth() {
@@ -33,7 +29,16 @@ export async function checkAuth() {
         location.replace('./other-page');
     }
 }
+// when a user tries to visit a page that calls this function, we automatically redirect the user away from the login page if they are already logged in
+export async function redirectIfLoggedIn() {
+    if (getUser()) {
+        location.replace('./other-page');
+    }
+}
 
-export async function redirectIfLoggedIn() {}
+export async function logout() {
 
-export async function logout() {}
+    await client.auth.signOut();
+
+    return (window.location.href = '/');
+}
